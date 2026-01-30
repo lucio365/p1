@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santino Nicastro | Editor de Video</title>
+    <style>
+        :root {
+            --rojo: #ff0000;
+            --negro-fondo: #050505;
+            --negro-card: #111111;
+            --gris-texto: #888888;
+            --blanco: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--negro-fondo);
+            color: var(--blanco);
+            line-height: 1.5;
+            padding: 0 5%;
+        }
+
+        /* --- HEADER & PRESENTACIÓN --- */
+        header {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: clamp(3.5rem, 10vw, 7rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 0.85;
+            margin-bottom: 30px;
+            letter-spacing: -3px;
+            /* Gradiente Webflow */
+            background: linear-gradient(180deg, #ffffff 10%, var(--rojo) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .presentacion {
+            font-size: 1.25rem;
+            color: var(--gris-texto);
+            max-width: 750px;
+            border-left: 3px solid var(--rojo);
+            padding-left: 25px;
+        }
+
+        /* --- CONTENEDORES --- */
+        .container {
+            max-width: 1200px;
+            margin: 120px auto;
+        }
+
+        .section-label {
+            color: var(--rojo);
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        h2.title-large {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 60px;
+            letter-spacing: -1px;
+                        background: linear-gradient(180deg, #ffffff 10%, var(--rojo) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* --- TRABAJOS (VIDEOS) --- */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+        }
+
+        .video-item video {
+            width: 100%;
+            border-radius: 8px;
+            background-color: #000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .video-caption {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--gris-texto);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- CLIENTES (FOTOS 3x2) --- */
+        .clientes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .cliente-img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+
+        /* --- PREGUNTAS FRECUENTES (FAQ) --- */
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: var(--negro-card);
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .faq-checkbox { display: none; }
+
+        .faq-question {
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .faq-question:hover { color: var(--rojo); }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--rojo);
+            transition: transform 0.3s;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            padding: 0 25px;
+            color: var(--gris-texto);
+            transition: all 0.4s ease-in-out;
+            overflow: hidden;
+        }
+
+        .faq-checkbox:checked ~ .faq-answer {
+            max-height: 300px;
+            padding-bottom: 25px;
+        }
+
+        .faq-checkbox:checked ~ .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 150px 0 80px;
+            text-align: center;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .btn-red {
+            color: var(--rojo);
+            text-decoration: none;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-red:hover {
+            color: var(--blanco);
+            letter-spacing: 2px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .video-grid, .clientes-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 4rem; }
+            header { height: auto; padding: 100px 0; }
+
+            
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>SANTINO<br>NICASTRO</h1>
+        <p class="presentacion">
+            Me presento. Mi nombre es Santino y hace más de 6 meses que me especializo a la edición de videos en Adobe Premiere Pro y After Effects.
+        </p>
+    </header>
+
+    <main class="container">
+        <h2 class="title-large">Trabajos seleccionados</h2>
+        
+        <div class="video-grid">
+            <div class="video-item">
+                <iframe 
+    src="https://drive.google.com/file/d/1MjKbk53VLCWexIIe2MIBfilqxQONQiWu/preview" 
+    width="350" 
+    height="620" 
+    allow="autoplay">
+</iframe>
+                <p class="video-caption">Video 1</p>
+            </div>
+            <div class="video-item">
+                <iframe 
+    src="https://drive.google.com/file/d/1UkfHovsieQ2Ah1Wc96Qr2XYUuVN43KYd/preview" 
+    width="350" 
+    height="620" 
+    allow="autoplay"
+    allowfullscreen>
+</iframe>
+                <p class="video-caption">Video 2</p>
+            </div>
+            <div class="video-item">
+                <iframe 
+    src="https://drive.google.com/file/d/1bsHhx8iVRWeqrmQeabzgxFb3D8KmSukg/preview" 
+    width="350" 
+    height="620" 
+    allow="autoplay"
+    allowfullscreen>
+</iframe>
+                <p class="video-caption">Video 3</p>
+            </div>
+            <div class="video-item">
+                <iframe 
+    src="https://drive.google.com/file/d/1nq_SS0rmB0XvS6zKLn7ImwI0CgPHwoiv/preview" 
+    width="350" 
+    height="620" 
+    allow="autoplay"
+    allowfullscreen>
+</iframe>
+                <p class="video-caption">Video 4</p>
+            </div>
+        </div>
+    </main>
+
+    <section class="container">
+        <h2 class="title-large">Clientes</h2>
+        <p style="color: var(--gris-texto); margin-bottom: 40px;">Estas son algunas de las personas con las que trabajé:</p>
+        
+        <div class="clientes-grid">
+            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804647430848586/image.png?ex=697e13c7&is=697cc247&hm=b5da0fcd7bc2841b38903eff564a2b3307ad5584a8a499e87627e9b8d29a1c9c&=&format=webp&quality=lossless" class="cliente-img" alt="Cliente">
+            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804683241689219/image.png?ex=697e13d0&is=697cc250&hm=77c2d52a7039967d00b46ddb12cd9e7e368471c1f8fdf10de51b4fb84d241229&=&format=webp&quality=lossless" class="cliente-img" alt="Cliente">
+            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804708072099943/image.png?ex=697e13d6&is=697cc256&hm=f9979c11360f13f381efe94edd57c4d6b1e2a7b6b4c1c93787d5830dc39a56da&=&format=webp&quality=lossless" class="cliente-img" alt="Cliente">
+            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804735817285642/image.png?ex=697e13dc&is=697cc25c&hm=cc3308eb422a286a8664b02ec874ddfce13411b330d0fa6b61fa19a005faab11&=&format=webp&quality=lossless" class="cliente-img" alt="Cliente">
+            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804760672862344/image.png?ex=697e13e2&is=697cc262&hm=062b3c443c265dcdc469c961c01c757e7a1c72a2622bb0481eeb49da3b2fd1e9&=&format=webp&quality=lossless" class="cliente-img" alt="Cliente">
+            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804784752234692/image.png?ex=697e13e8&is=697cc268&hm=e16ef569576d50df920ae97384cb21267e2e1f88e87c9aaec269d10003531123&=&format=webp&quality=lossless" class="cliente-img" alt="Cliente">
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 class="title-large">Preguntas frecuentes</h2>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <input type="checkbox" id="faq1" class="faq-checkbox">
+                <label for="faq1" class="faq-question">¿Quién soy?</label>
+                <div class="faq-answer">Me llamo Santino, y soy editor de videos. Mi objetivo es darle vida a tus ideas. Trabajo para que cada proyecto se vea profesional, cuidando siempre el estilo y la fluidez en cada detalle.</div>
+            </div>
+            <div class="faq-item">
+                <input type="checkbox" id="faq2" class="faq-checkbox">
+                <label for="faq2" class="faq-question">¿que tipo de contenido trabajas?</label>
+                <div class="faq-answer">Desde videos cortos para redes sociales hasta ediciones dinámicas con After Effects.</div>
+            </div>
+            <div class="faq-item">
+                <input type="checkbox" id="faq3" class="faq-checkbox">
+                <label for="faq3" class="faq-question">¿Cuales son los metodos de pago?</label>
+                <div class="faq-answer">Solo el material bruto y una idea general del estilo que buscas.</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <br>
+        <a href="https://w.app/santinicastro" class="btn-red">Contactame</a>
+        <p style="margin-top: 60px; color: #333; font-size: 0.8rem;">&copy; Lucio Albani | Programador Front-End</p>
+    </footer>
+
+</body>
+</html>
