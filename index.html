@@ -27,7 +27,7 @@
             padding: 0 5%;
         }
 
-        /* --- HEADER CON FOTO AL LADO --- */
+        /* --- HEADER & PRESENTACIÓN AJUSTADO PARA FOTO --- */
         header {
             min-height: 90vh;
             display: flex;
@@ -36,24 +36,25 @@
             margin: 0 auto;
         }
 
-        .header-content {
+        .header-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            gap: 60px;
+            gap: 50px;
         }
 
-        .header-text { flex: 1; }
+        .header-text {
+            flex: 1;
+        }
 
         h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(3rem, 8vw, 6.5rem);
             font-weight: 900;
             text-transform: uppercase;
             line-height: 0.85;
             margin-bottom: 30px;
             letter-spacing: -3px;
-            /* Gradiente Webflow */
             background: linear-gradient(180deg, #ffffff 10%, var(--rojo) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -61,22 +62,33 @@
         }
 
         .presentacion {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--gris-texto);
             max-width: 600px;
             border-left: 3px solid var(--rojo);
-            padding-left: 20px;
+            padding-left: 25px;
         }
 
-        .header-profile-img {
-            width: 380px;
-            height: auto;
-            border-radius: 24px;
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            box-shadow: 0 20px 50px rgba(255, 0, 0, 0.1);
+        .header-photo {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transition: transform 0.5s ease;
         }
 
-        /* --- TITULOS CON GRADIENT --- */
+        .header-photo:hover {
+            transform: scale(1.02);
+            border-color: var(--rojo);
+        }
+
+        /* --- CONTENEDORES --- */
+        .container {
+            max-width: 1200px;
+            margin: 120px auto;
+        }
+
         h2.title-large {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
@@ -88,57 +100,52 @@
             background-clip: text;
         }
 
-        /* --- CONTENEDORES --- */
-        .container { max-width: 1200px; margin: 120px auto; }
-        .section-label {
-            color: var(--rojo);
-            text-transform: uppercase;
-            font-weight: bold;
-            font-size: 0.85rem;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-            display: block;
-        }
-
         /* --- TRABAJOS (VIDEOS) --- */
         .video-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
+            gap: 50px;
         }
-        .video-item video {
+
+        .video-item iframe, .video-item video {
             width: 100%;
             border-radius: 8px;
             background-color: #000;
-            outline: 1px solid #1a1a1a;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
-        .video-caption { margin-top: 15px; font-size: 0.9rem; color: var(--gris-texto); text-transform: uppercase; }
 
-        /* --- CLIENTES (3X2) --- */
+        .video-caption {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--gris-texto);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- CLIENTES --- */
         .clientes-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
         }
+
         .cliente-img {
             width: 100%;
             height: auto;
             border-radius: 8px;
-            transition: transform 0.3s ease;
         }
-        .cliente-img:hover { transform: scale(1.02); }
 
-        /* --- FAQ CON FONDO GRADIENT --- */
+        /* --- PREGUNTAS FRECUENTES (FAQ) --- */
         .faq-item {
-            background: linear-gradient(145deg, #111111 0%, #050505 100%);
-            border: 1px solid #222;
+            background-color: var(--negro-card);
+            border: 1px solid #1a1a1a;
             border-radius: 12px;
             margin-bottom: 15px;
             overflow: hidden;
-            transition: 0.3s;
         }
-        .faq-item:hover { border-color: var(--rojo); }
+
         .faq-checkbox { display: none; }
+
         .faq-question {
             padding: 25px;
             display: flex;
@@ -146,28 +153,61 @@
             align-items: center;
             cursor: pointer;
             font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
         }
-        .faq-question::after { content: '∨'; color: var(--rojo); transition: 0.3s; }
+
+        .faq-question:hover { color: var(--rojo); }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--rojo);
+            transition: transform 0.3s;
+        }
+
         .faq-answer {
             max-height: 0;
             padding: 0 25px;
             color: var(--gris-texto);
-            transition: all 0.4s ease;
+            transition: all 0.4s ease-in-out;
             overflow: hidden;
-            background: linear-gradient(180deg, rgba(255, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0) 100%);
         }
-        .faq-checkbox:checked ~ .faq-answer { max-height: 300px; padding-bottom: 25px; }
-        .faq-checkbox:checked ~ .faq-question::after { transform: rotate(180deg); }
+
+        .faq-checkbox:checked ~ .faq-answer {
+            max-height: 300px;
+            padding-bottom: 25px;
+        }
+
+        .faq-checkbox:checked ~ .faq-question::after {
+            transform: rotate(45deg);
+        }
 
         /* --- FOOTER --- */
-        footer { padding: 100px 0; text-align: center; border-top: 1px solid #1a1a1a; }
-        .btn-red { color: var(--rojo); text-decoration: none; font-size: 2.5rem; font-weight: 900; transition: 0.3s; }
-        .btn-red:hover { color: var(--blanco); }
+        footer {
+            padding: 100px 0 80px;
+            text-align: center;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .btn-red {
+            color: var(--rojo);
+            text-decoration: none;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-red:hover {
+            color: var(--blanco);
+            letter-spacing: 2px;
+        }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
-            .header-content { flex-direction: column; text-align: left; }
-            .header-profile-img { width: 100%; max-width: 350px; order: -1; }
+            .header-container { flex-direction: column; text-align: left; }
+            .header-photo { order: -1; width: 100%; max-width: 320px; }
             .video-grid, .clientes-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -175,73 +215,78 @@
 <body>
 
     <header>
-        <div class="header-content">
+        <div class="header-container">
             <div class="header-text">
                 <h1>SANTINO<br>NICASTRO</h1>
                 <p class="presentacion">
                     Me presento. Mi nombre es Santino y hace más de 6 meses que me especializo a la edición de videos en Adobe Premiere Pro y After Effects.
                 </p>
             </div>
-            <img src="https://i.ibb.co/JFq8RGs9/Whats-App-Image-2026-01-30-at-18-56-37.jpg" class="header-profile-img" alt="Santino Nicastro">
+            <img src="https://i.ibb.co/JFq8RGs9/Whats-App-Image-2026-01-30-at-18-56-37.jpg" alt="Santino Nicastro" class="header-photo">
         </div>
     </header>
 
     <main class="container">
-        <span class="section-label">01 / Trabajos</span>
-        <h2 class="title-large">Videos</h2>
+        <h2 class="title-large">Trabajos seleccionados</h2>
+        
         <div class="video-grid">
             <div class="video-item">
-                <video controls><source src="HUGO TERMINADO 2_2.mp4" type="video/mp4"></video>
-                <p class="video-caption">HUGO TERMINADO 2_2</p>
+                <iframe src="https://drive.google.com/file/d/1MjKbk53VLCWexIIe2MIBfilqxQONQiWu/preview" width="100%" height="620" allow="autoplay"></iframe>
+                <p class="video-caption">Video 1</p>
             </div>
             <div class="video-item">
-                <video controls><source src="Modulo Messi SFX.mp4" type="video/mp4"></video>
-                <p class="video-caption">Modulo Messi SFX</p>
+                <div style="position:relative; width:100%; height:0px; padding-bottom:177.778%"><iframe allow="fullscreen" allowfullscreen src="https://streamable.com/e/5355cp?" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden;"></iframe></div>
+                <p class="video-caption">Video 2</p>
             </div>
             <div class="video-item">
-                <video controls><source src="Terminado 2.mp4" type="video/mp4"></video>
-                <p class="video-caption">Terminado 2</p>
+                <div style="position:relative; width:100%; height:0px; padding-bottom:176.389%"><iframe allow="fullscreen" allowfullscreen src="https://streamable.com/e/94orxk?" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden;"></iframe></div>
+                <p class="video-caption">Video 3</p>
             </div>
             <div class="video-item">
-                <video controls><source src="vitto 2.mp4" type="video/mp4"></video>
-                <p class="video-caption">vitto 2 (1)</p>
+                <div style="position:relative; width:100%; height:0px; padding-bottom:177.778%"><iframe allow="fullscreen" allowfullscreen src="https://streamable.com/e/ugbts0?" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden;"></iframe></div>
+                <p class="video-caption">Video 4</p>
             </div>
         </div>
     </main>
 
     <section class="container">
-        <span class="section-label">02 / Clientes</span>
         <h2 class="title-large">Clientes</h2>
         <p style="color: var(--gris-texto); margin-bottom: 40px;">Estas son algunas de las personas con las que trabajé:</p>
+        
         <div class="clientes-grid">
-            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804647430848586/image.png?..." class="cliente-img" alt="C1">
-            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804683241689219/image.png?..." class="cliente-img" alt="C2">
-            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804708072099943/image.png?..." class="cliente-img" alt="C3">
-            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804735817285642/image.png?..." class="cliente-img" alt="C4">
-            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804760672862344/image.png?..." class="cliente-img" alt="C5">
-            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804784752234692/image.png?..." class="cliente-img" alt="C6">
+            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804647430848586/image.png?..." class="cliente-img" alt="Cliente">
+            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804683241689219/image.png?..." class="cliente-img" alt="Cliente">
+            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804708072099943/image.png?..." class="cliente-img" alt="Cliente">
+            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804735817285642/image.png?..." class="cliente-img" alt="Cliente">
+            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804760672862344/image.png?..." class="cliente-img" alt="Cliente">
+            <img src="https://media.discordapp.net/attachments/1466774388853444679/1466804784752234692/image.png?..." class="cliente-img" alt="Cliente">
         </div>
     </section>
 
     <section class="container">
-        <span class="section-label">03 / Ayuda</span>
         <h2 class="title-large">Preguntas frecuentes</h2>
         <div class="faq-container">
             <div class="faq-item">
-                <input type="checkbox" id="f1" class="faq-checkbox">
-                <label for="f1" class="faq-question">¿Quién soy?</label>
-                <div class="faq-answer">Me llamo Santino, y soy editor de videos. Mi objetivo es darle vida a tus ideas con fluidez y estilo.</div>
+                <input type="checkbox" id="faq1" class="faq-checkbox">
+                <label for="faq1" class="faq-question">¿Quién soy?</label>
+                <div class="faq-answer">Me llamo Santino, y soy editor de videos. Mi objetivo es darle vida a tus ideas. Trabajo para que cada proyecto se vea profesional, cuidando siempre el estilo y la fluidez en cada detalle.</div>
             </div>
             <div class="faq-item">
-                <input type="checkbox" id="f2" class="faq-checkbox">
-                <label for="f2" class="faq-question">¿Qué tipo de contenido trabajás?</label>
-                <div class="faq-answer">Desde videos cortos para redes hasta ediciones avanzadas en After Effects.</div>
+                <input type="checkbox" id="faq2" class="faq-checkbox">
+                <label for="faq2" class="faq-question">¿Qué tipo de contenido trabajas?</label>
+                <div class="faq-answer">Desde videos cortos para redes sociales hasta ediciones dinámicas con After Effects.</div>
+            </div>
+            <div class="faq-item">
+                <input type="checkbox" id="faq3" class="faq-checkbox">
+                <label for="faq3" class="faq-question">¿Cuáles son los métodos de pago?</label>
+                <div class="faq-answer">Acepto transferencias bancarias, Mercado Pago y criptomonedas. Charlamos el que te quede más cómodo.</div>
             </div>
         </div>
     </section>
 
     <footer>
-        <a href="mailto:tuemail@ejemplo.com" class="btn-red">Hablemos de tu proyecto</a>
+        <a href="https://w.app/santinicastro" class="btn-red">Contactame</a>
+        <p style="margin-top: 60px; color: #333; font-size: 0.8rem;">&copy; Lucio Albani | Programador Front-End</p>
     </footer>
 
 </body>
